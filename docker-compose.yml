@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-
+# En local, comenta las líneas de proxy y ssl
   proxy:
     hostname: proxy
     container_name: proxy
@@ -59,6 +59,7 @@ services:
     volumes:
       - "./moodle-root:/var/www/html"
       - "./moodle-data:/var/moodledata"
+    # En local descomenta estas líneas
     # ports:
     #   - 80:80
 
