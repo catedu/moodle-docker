@@ -8,6 +8,7 @@ moodle-data/*
 moodle-root/*
 bbdd/*
 dump/*
+moodle-root
 
 # keep folders
 !moodle-data/.gitkeep
