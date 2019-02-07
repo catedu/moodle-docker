@@ -40,15 +40,16 @@ RUN { \
 
 RUN a2enmod rewrite expires
 
-RUN	echo "Installing moodle" && \
-		# better tgz file, smaller and we can remove parent directory with --strip option so we don't have to move folder, time saving!!!
-		curl https://download.moodle.org/download.php/direct/stable${VERSION}/moodle-latest-${VERSION}.tgz -o /var/www/html/moodle-latest.tgz  && \
-		cd /var/www/html && tar -xf moodle-latest.tgz --strip 1 && \
-		mkdir /var/www/moodledata && chown www-data:www-data /var/www/moodledata  && \
-		chown -R www-data:www-data -R /var/www/html && \
-		rm /var/www/html/moodle-latest.tgz
+# RUN	echo "Installing moodle" && \
+# 		# better tgz file, smaller and we can remove parent directory with --strip option so we don't have to move folder, time saving!!!
+# 		curl https://download.moodle.org/download.php/direct/stable${VERSION}/moodle-latest-${VERSION}.tgz -o /var/www/html/moodle-latest.tgz  && \
+# 		cd /var/www/html && tar -xf moodle-latest.tgz --strip 1 && \
+# 		mkdir /var/www/moodledata && chown www-data:www-data /var/www/moodledata  && \
+# 		chown -R www-data:www-data -R /var/www/html && \
+# 		rm /var/www/html/moodle-latest.tgz
 
 # Fix the original permissions of /tmp, the PHP default upload tmp dir.
 RUN chmod 777 /tmp && chmod +t /tmp
 
-COPY ./moodle-config.php /moodle/config.php
+RUN chown -R www-data:www-data /var/www/html
+RUN chown -R www-data:www-data /var/moodledata

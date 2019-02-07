@@ -72,6 +72,7 @@ services:
       MYSQL_DATABASE: "${MOODLE_DB_NAME}"
       MYSQL_USER: '${MOODLE_MYSQL_USER}'
       MYSQL_PASSWORD: '${MOODLE_MYSQL_PASSWORD}'
+    command: mysqld --max_allowed_packet=1000M
     networks:
       - backend
     volumes:
