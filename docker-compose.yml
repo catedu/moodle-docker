@@ -2,24 +2,24 @@ version: '3'
 
 services:
 # En local, comenta las líneas de proxy y ssl
-  proxy:
-    hostname: proxy
-    container_name: proxy
-    image: jwilder/nginx-proxy
-    labels:
-      com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - "/var/run/docker.sock:/tmp/docker.sock:ro"
-      - "./proxy/vhost.d:/etc/nginx/vhost.d"
-      - "./proxy/custom.conf:/etc/nginx/conf.d/custom.conf"
-      - "/usr/share/nginx/html"
-      - "./proxy/certs:/etc/nginx/certs:ro"
-      - html:/usr/share/nginx/html
-    networks:
-      - frontend
+  # proxy:
+  #   hostname: proxy
+  #   container_name: proxy
+  #   image: jwilder/nginx-proxy
+  #   labels:
+  #     com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - "/var/run/docker.sock:/tmp/docker.sock:ro"
+  #     - "./proxy/vhost.d:/etc/nginx/vhost.d"
+  #     - "./proxy/custom.conf:/etc/nginx/conf.d/custom.conf"
+  #     - "/usr/share/nginx/html"
+  #     - "./proxy/certs:/etc/nginx/certs:ro"
+  #     - html:/usr/share/nginx/html
+  #   networks:
+  #     - frontend
 
   ssl:
     hostname: ssl
@@ -60,8 +60,8 @@ services:
       - "./moodle-root:/var/www/html"
       - "./moodle-data:/var/moodledata"
     # En local descomenta estas líneas
-    # ports:
-    #   - 80:80
+    ports:
+      - 80:80
 
   db:
     hostname: db
