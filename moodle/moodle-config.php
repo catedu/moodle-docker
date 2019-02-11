@@ -75,7 +75,7 @@ $CFG->dboptions = array(
 // If you need both intranet and Internet access please read
 // http://docs.moodle.org/en/masquerading
 
-$CFG->wwwroot   = getenv('http://moodle.catedu.org');
+$CFG->wwwroot   = 'https://newmoodle.catedu.org';
 
 //=========================================================================
 // 3. DATA FILES LOCATION
@@ -289,7 +289,7 @@ if(filter_var(getenv(MOODLE_REVERSE_LB),FILTER_VALIDATE_BOOLEAN)){
 // Enable when using external SSL appliance for performance reasons.
 // Please note that site may be accessible via https: or https:, but not both!
 if(filter_var(getenv(MOODLE_SSL),FILTER_VALIDATE_BOOLEAN)){
-     $CFG->sslproxy = false;
+     $CFG->sslproxy = true;
 }
 
 //
