@@ -61,6 +61,7 @@ $CFG->dboptions = array(
     'dbport'    => getenv('MOODLE_DB_PORT'),          // the TCP port number to use when connecting
                                 //  to the server. keep empty string for the
                                 //  default port
+    'dbcollation' => 'utf8mb4_unicode_ci',
 );
 
 
@@ -75,7 +76,7 @@ $CFG->dboptions = array(
 // If you need both intranet and Internet access please read
 // http://docs.moodle.org/en/masquerading
 
-$CFG->wwwroot   = getenv('http://moodle.catedu.org');
+$CFG->wwwroot   = 'http://moodle.catedu.org';
 
 //=========================================================================
 // 3. DATA FILES LOCATION

@@ -50,6 +50,3 @@ RUN a2enmod rewrite expires
 
 # Fix the original permissions of /tmp, the PHP default upload tmp dir.
 RUN chmod 777 /tmp && chmod +t /tmp
-
-RUN chown -R www-data:www-data /var/www/html
-RUN chown -R www-data:www-data /var/moodledata
