@@ -38,6 +38,7 @@ docker-php-ext-install -j$(nproc) \
     soap \
     xmlrpc \
     zip \
+    xsl \
     opcache # Not used, to prevent segmentation fault (11), possible coredump in /etc/apache2
 
 # Keep our image size down..
