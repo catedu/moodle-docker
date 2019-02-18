@@ -61,6 +61,7 @@ $CFG->dboptions = array(
     'dbport'    => getenv('MOODLE_DB_PORT'),          // the TCP port number to use when connecting
                                 //  to the server. keep empty string for the
                                 //  default port
+    'dbcollation' => 'utf8mb4_unicode_ci',
 );
 
 
