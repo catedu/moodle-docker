@@ -40,15 +40,31 @@ RUN { \
 
 RUN a2enmod rewrite expires
 
-RUN	echo "Installing moodle" && \
-		# better tgz file, smaller and we can remove parent directory with --strip option so we don't have to move folder, time saving!!!
-		curl https://download.moodle.org/download.php/direct/stable${VERSION}/moodle-latest-${VERSION}.tgz -o /var/www/html/moodle-latest.tgz  && \
-		cd /var/www/html && tar -xf moodle-latest.tgz --strip 1 && \
-		mkdir /var/www/moodledata && chown www-data:www-data /var/www/moodledata  && \
-		chown -R www-data:www-data -R /var/www/html && \
-		rm /var/www/html/moodle-latest.tgz
+# RUN	echo "Installing moodle" && \
+# 		# better tgz file, smaller and we can remove parent directory with --strip option so we don't have to move folder, time saving!!!
+# 		curl https://download.moodle.org/download.php/direct/stable${VERSION}/moodle-latest-${VERSION}.tgz -o /var/www/html/moodle-latest.tgz  && \
+# 		cd /var/www/html && tar -xf moodle-latest.tgz --strip 1 && \
+# 		mkdir /var/www/moodledata && chown www-data:www-data /var/www/moodledata  && \
+# 		chown -R www-data:www-data -R /var/www/html && \
+# 		rm /var/www/html/moodle-latest.tgz
 
 # Fix the original permissions of /tmp, the PHP default upload tmp dir.
 RUN chmod 777 /tmp && chmod +t /tmp
 
-COPY ./moodle-config.php /moodle/config.php
+WORKDIR /home
+
+RUN apt update
+RUN apt install software-properties-common -y
+RUN apt update
+RUN apt install git -y
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+RUN php -r "if (hash_file('sha384', 'composer-setup.php') === '48e3236262b34d30969dca3c37281b3b4bbe3221bda826ac6a9a62d6444cdb0dcd0615698a5cbe587c3f0fe57a54d8f5') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+RUN php composer-setup.php
+RUN php -r "unlink('composer-setup.php');"
+RUN mv composer.phar /usr/local/bin/composer
+RUN git clone git://github.com/tmuras/moosh.git
+WORKDIR /home/moosh
+RUN composer install
+RUN ln -s $PWD/moosh.php /usr/local/bin/moosh
+
+WORKDIR /var/www/html
