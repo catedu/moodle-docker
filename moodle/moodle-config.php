@@ -76,7 +76,7 @@ $CFG->dboptions = array(
 // If you need both intranet and Internet access please read
 // http://docs.moodle.org/en/masquerading
 
-$CFG->wwwroot   = 'https://newmoodle.catedu.org';
+$CFG->wwwroot   = 'https://newmoodle.catedu.es';
 
 //=========================================================================
 // 3. DATA FILES LOCATION
