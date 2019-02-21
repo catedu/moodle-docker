@@ -11,6 +11,4 @@ dump/*
 moodle-root
 
 # keep folders
-!moodle-data/.gitkeep
-!bbdd/.gitkeep
 !dump/.gitkeep
